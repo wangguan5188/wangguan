@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
+	
+	<!-- 设置自定义的监听器 
+	<listener>
+		<listener-class>com.wangguan.listener.GetConnListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>com.wangguan.listener.MyServletContextAttributeListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>com.wangguan.listener.OnlineListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>com.wangguan.listener.RequestListener</listener-class>
+	</listener>
+	-->
+
+	<!-- 通过listener，在tomcat服务器启动时，自动初始化Spring容器。 
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	-->
+	<!-- listener依赖的参数，即spring的配置文件 
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath*:applicationContext.xml</param-value>
+	</context-param>
+	-->
+	
+	<!-- 权限检查过滤器 -->
+	<filter>
+		<filter-name>MyFilter</filter-name>
+		<filter-class>com.wangguan.filter.MyFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>MyFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- 编码设置，详细信息参考doc目录下相关文档 -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>false</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- 设置欢迎页面 -->
+	<welcome-file-list>
+		<welcome-file>home.jsp</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+</web-app>
